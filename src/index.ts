@@ -59,7 +59,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
             ssl: true,
             authSource: "admin",
             // replicaSet: "articleappcluster.swdsz",
-            url: process.env.MONGO_DB_URI || ur(),
+            url: 'mongodb+srv://admin:abomandella@articleappcluster.swdsz.mongodb.net:27017/firstproject?retryWrites=true&w=majority',
 
         });
         console.log('connection is successeded ...');
