@@ -53,6 +53,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
         console.log('connection is successeded ...');
 
     } catch (error) {
+        console.log(error);
+
         console.log('connection is failured ...');
 
     }
