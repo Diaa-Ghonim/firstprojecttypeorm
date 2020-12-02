@@ -62,7 +62,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
             url: process.env.MONGO_DB_URI || ur(),
 
             entities: [
-                "build/entity/**/*.js"
+                "entity/**/*.js"
             ],
         });
         console.log('connection is successeded ...');
