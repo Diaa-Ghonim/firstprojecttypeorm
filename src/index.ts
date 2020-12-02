@@ -38,15 +38,15 @@ app.use(bodyParser.json({ limit: '50mb' }));
 (async () => {
     try {
         await createConnection({
-            "name": "default",
-            "type": "mongodb",
+            name: "default",
+            type: "mongodb",
             useUnifiedTopology: true,
             useNewUrlParser: true,
-            url: process.env.NODE_ENV ? process.env.MONGO_DB_URI : '',
-            "database": "firstproject",
-            "synchronize": true,
-            "logging": false,
-            "entities": [
+            database: "firstproject",
+            synchronize: true,
+            logging: false,
+            ssl: true,
+            entities: [
                 "src/entity/**/*.ts"
             ],
         });
