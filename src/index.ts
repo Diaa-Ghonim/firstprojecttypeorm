@@ -61,9 +61,6 @@ app.use(bodyParser.json({ limit: '50mb' }));
             // replicaSet: "articleappcluster.swdsz",
             url: process.env.MONGO_DB_URI || ur(),
 
-            entities: [
-                "entity/**/*.js"
-            ],
         });
         console.log('connection is successeded ...');
 
