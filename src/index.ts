@@ -56,8 +56,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
             // database: "firstproject",
             // synchronize: true,
             // logging: false,
-            // ssl: true,
-            // authSource: "admin",
+            ssl: true,
+            authSource: "admin",
             replicaSet: "articleappcluster.swdsz",
             url: process.env.MONGO_DB_URI || ur(),
 
