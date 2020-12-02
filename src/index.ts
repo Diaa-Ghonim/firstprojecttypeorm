@@ -53,7 +53,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
             useUnifiedTopology: true,
             useNewUrlParser: true,
             // port: 27017,
-            // database: "firstproject",
+            database: "firstproject",
             // synchronize: true,
             // logging: false,
 
