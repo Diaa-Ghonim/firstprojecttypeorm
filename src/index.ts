@@ -56,11 +56,12 @@ app.use(bodyParser.json({ limit: '50mb' }));
             // database: "firstproject",
             // synchronize: true,
             // logging: false,
-            ssl: true,
-            authSource: "admin",
-            // replicaSet: "articleappcluster.swdsz",
-            url: 'mongodb+srv://admin:abomandella@articleappcluster.swdsz.mongodb.net:27017/firstproject?retryWrites=true&w=majority',
 
+            // replicaSet: "articleappcluster.swdsz",
+            // url: 'mongodb+srv://admin:abomandella@articleappcluster.swdsz.mongodb.net:27017/firstproject?retryWrites=true&w=majority',
+            url: "mongodb://articleappcluster.example.net:27017?replicaSet=test&connectTimeoutMS=3000000000",
+            ssl: true,
+            authSource: "admin"
         });
         console.log('connection is successeded ...');
 
