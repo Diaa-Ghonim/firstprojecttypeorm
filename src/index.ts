@@ -71,7 +71,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
             //     "src/entity/**/*.ts"
             // ],
         });
-        console.log('connection is successeded ...');
+        console.log('connection is successeded ....');
 
     } catch (error) {
         console.log(error);
