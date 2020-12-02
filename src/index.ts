@@ -37,6 +37,15 @@ app.use(bodyParser.json({ limit: '50mb' }));
 // MongoServerSelectionError: connect ECONNREFUSED 127.0.0.1: 27017
 (async () => {
     try {
+        const ur = () => {
+            let a;
+
+            if (process.env.NODE_ENV === 'production') {
+                a = process.env.MONGO_DB_URI
+            }
+            console.log(a, 'this is a variable');
+            return a;
+        }
         await createConnection();
         await createConnection({
             // name: "default",
@@ -44,10 +53,10 @@ app.use(bodyParser.json({ limit: '50mb' }));
             useUnifiedTopology: true,
             useNewUrlParser: true,
             // port: 27017,
-            url: process.env.NODE_ENV === 'production' ? process.env.MONGO_DB_URI : '',
+            url: ur(),
             // database: "firstproject",
-            // synchronize: true,
-            // logging: false,
+            synchronize: true,
+            logging: false,
             ssl: true,
             authSource: "admin",
             // replicaSet: "TestCluster0-shard-0",
