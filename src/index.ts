@@ -46,7 +46,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
             console.log(a, 'this is a variable');
             return a;
         }
-        await createConnection();
+        // await createConnection();
         await createConnection({
             // name: "default",
             type: "mongodb",
