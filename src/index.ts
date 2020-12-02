@@ -62,11 +62,14 @@ app.use(bodyParser.json({ limit: '50mb' }));
             // url: "mongodb://articleappcluster.example.net:27017?replicaSet=test&connectTimeoutMS=3000000000",
             ssl: true,
             authSource: "admin",
+            entities: [
+                User
+            ]
             // password: 'abomandella',
             // username: 'admin',
-            "entities": [
-                "src/entity/**/*.ts"
-            ],
+            // "entities": [
+            //     "src/entity/**/*.ts"
+            // ],
         });
         console.log('connection is successeded ...');
 
