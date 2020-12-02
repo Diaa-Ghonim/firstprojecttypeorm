@@ -37,22 +37,23 @@ app.use(bodyParser.json({ limit: '50mb' }));
 // MongoServerSelectionError: connect ECONNREFUSED 127.0.0.1: 27017
 (async () => {
     try {
-        await createConnection({
-            name: "default",
-            type: "mongodb",
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-            port: 27017,
-            url: process.env.NODE_ENV === 'production' ? process.env.MONGO_DB_URI : '',
-            database: "firstproject",
-            synchronize: true,
-            logging: false,
-            ssl: true,
-            authSource: "admin",
-            entities: [
-                "src/entity/**/*.ts"
-            ],
-        });
+        await createConnection();
+        // await createConnection({
+        //     name: "default",
+        //     type: "mongodb",
+        //     useUnifiedTopology: true,
+        //     useNewUrlParser: true,
+        //     port: 27017,
+        //     url: process.env.NODE_ENV === 'production' ? process.env.MONGO_DB_URI : '',
+        //     database: "firstproject",
+        //     synchronize: true,
+        //     logging: false,
+        //     ssl: true,
+        //     authSource: "admin",
+        //     entities: [
+        //         "src/entity/**/*.ts"
+        //     ],
+        // });
         console.log('connection is successeded ...');
 
     } catch (error) {
@@ -67,7 +68,7 @@ console.log('after async');
 
 app.get('/users', async (req, res) => {
     try {
-        const userRepo = getConnection('default').getRepository(User);
+        const userRepo = getConnection().getRepository(User);
 
         const users: User[] | [] = await userRepo.find();
         res.json(users);
@@ -82,7 +83,7 @@ app.post('/users', async (req, res) => {
     console.log(req.body);
 
     try {
-        const userRepo = getConnection('default').getRepository(User);
+        const userRepo = getConnection().getRepository(User);
         const { firstName, lastName, age } = req.body;
         const user = new User();
         user.firstName = firstName;
@@ -148,3 +149,26 @@ createConnection().then(async connection => {
 
 }).catch(error => console.log(error));
 */
+
+// export = {
+//   "name": "default",
+//   "type": "mongodb",
+//   "database": "firstproject",
+//   url: process.env.NODE_ENV
+//   "synchronize": true,
+//   "logging": false,
+//   "entities": [
+//     "src/entity/**/*.ts"
+//   ],
+//   "migrations": [
+//     "src/migration/**/*.ts"
+//   ],
+//   "subscribers": [
+//     "src/subscriber/**/*.ts"
+//   ],
+//   "cli": {
+//     "entitiesDir": "src/entity",
+//     "migrationsDir": "src/migration",
+//     "subscribersDir": "src/subscriber"
+//   }
+// }
