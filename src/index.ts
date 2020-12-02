@@ -53,13 +53,14 @@ app.use(bodyParser.json({ limit: '50mb' }));
             useUnifiedTopology: true,
             useNewUrlParser: true,
             // port: 27017,
-            url: ur(),
             // database: "firstproject",
-            synchronize: true,
-            logging: false,
-            ssl: true,
-            authSource: "admin",
+            // synchronize: true,
+            // logging: false,
+            // ssl: true,
+            // authSource: "admin",
             // replicaSet: "TestCluster0-shard-0",
+            url: process.env.MONGO_DB_URI || ur(),
+
             entities: [
                 "src/entity/**/*.ts"
             ],
