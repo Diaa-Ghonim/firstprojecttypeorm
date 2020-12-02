@@ -63,7 +63,10 @@ app.use(bodyParser.json({ limit: '50mb' }));
             ssl: true,
             authSource: "admin",
             // password: 'abomandella',
-            // username: 'admin'
+            // username: 'admin',
+            "entities": [
+                "src/entity/**/*.ts"
+            ],
         });
         console.log('connection is successeded ...');
 
