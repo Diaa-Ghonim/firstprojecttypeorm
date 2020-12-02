@@ -34,7 +34,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 
 // }).catch(error => console.log(error));
 
-
+// MongoServerSelectionError: connect ECONNREFUSED 127.0.0.1: 27017
 (async () => {
     try {
         await createConnection({
@@ -42,10 +42,13 @@ app.use(bodyParser.json({ limit: '50mb' }));
             type: "mongodb",
             useUnifiedTopology: true,
             useNewUrlParser: true,
+            port: 27017,
+            url: process.env.NODE_ENV === 'production' ? process.env.MONGO_DB_URI : '',
             database: "firstproject",
             synchronize: true,
             logging: false,
             ssl: true,
+            authSource: "admin",
             entities: [
                 "src/entity/**/*.ts"
             ],
