@@ -61,7 +61,9 @@ app.use(bodyParser.json({ limit: '50mb' }));
             // url: 'mongodb+srv://admin:abomandella@articleappcluster.swdsz.mongodb.net:27017/firstproject?retryWrites=true&w=majority',
             url: "mongodb://articleappcluster.example.net:27017?replicaSet=test&connectTimeoutMS=3000000000",
             ssl: true,
-            authSource: "admin"
+            authSource: "admin",
+            password: 'abomandella',
+            username: 'admin'
         });
         console.log('connection is successeded ...');
 
