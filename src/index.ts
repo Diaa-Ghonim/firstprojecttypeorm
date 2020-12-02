@@ -58,7 +58,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
             // logging: false,
 
             // replicaSet: "articleappcluster.swdsz",
-            url: 'mongodb+srv://admin:abomandella@articleappcluster.swdsz.mongodb.net/firstproject?retryWrites=true&w=majority',
+            url: process.env.NODE_ENV === 'production' ? 'mongodb+srv://admin:abomandella@articleappcluster.swdsz.mongodb.net/firstproject?retryWrites=true&w=majority' : '',
             // url: "mongodb://articleappcluster.example.net:27017?replicaSet=test&connectTimeoutMS=3000000000",
             // ssl: true,
             // authSource: "admin",
