@@ -60,8 +60,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
             // replicaSet: "articleappcluster.swdsz",
             url: 'mongodb+srv://admin:abomandella@articleappcluster.swdsz.mongodb.net/firstproject?retryWrites=true&w=majority',
             // url: "mongodb://articleappcluster.example.net:27017?replicaSet=test&connectTimeoutMS=3000000000",
-            ssl: true,
-            authSource: "admin",
+            // ssl: true,
+            // authSource: "admin",
             entities: [
                 User
             ]
