@@ -42,7 +42,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
             "type": "mongodb",
             useUnifiedTopology: true,
             useNewUrlParser: true,
-            url: process.env.NODE_ENV === 'production' ? process.env.MONGO_DB_URI : '',
+            url: process.env.NODE_ENV ? process.env.MONGO_DB_URI : '',
             "database": "firstproject",
             "synchronize": true,
             "logging": false,
