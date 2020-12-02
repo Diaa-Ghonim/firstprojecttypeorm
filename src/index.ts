@@ -38,22 +38,23 @@ app.use(bodyParser.json({ limit: '50mb' }));
 (async () => {
     try {
         await createConnection();
-        // await createConnection({
-        //     name: "default",
-        //     type: "mongodb",
-        //     useUnifiedTopology: true,
-        //     useNewUrlParser: true,
-        //     port: 27017,
-        //     url: process.env.NODE_ENV === 'production' ? process.env.MONGO_DB_URI : '',
-        //     database: "firstproject",
-        //     synchronize: true,
-        //     logging: false,
-        //     ssl: true,
-        //     authSource: "admin",
-        //     entities: [
-        //         "src/entity/**/*.ts"
-        //     ],
-        // });
+        await createConnection({
+            // name: "default",
+            type: "mongodb",
+            useUnifiedTopology: true,
+            useNewUrlParser: true,
+            // port: 27017,
+            url: process.env.NODE_ENV === 'production' ? process.env.MONGO_DB_URI : '',
+            // database: "firstproject",
+            // synchronize: true,
+            // logging: false,
+            ssl: true,
+            authSource: "admin",
+            // replicaSet: "TestCluster0-shard-0",
+            entities: [
+                "src/entity/**/*.ts"
+            ],
+        });
         console.log('connection is successeded ...');
 
     } catch (error) {
