@@ -12,7 +12,7 @@ import { CustomMulter } from './middlewares/multerMiddleware';
 import { getConnection } from "typeorm";
 import { User } from "./entity/User";
 import './initializeTypeormConnection';
-app.use('/static', express.static(path.join(__dirname, '..')));
+app.use('/static', express.static(path.join(__dirname, '..', '..', 'client')));
 
 // app.use(bodyParser.json({ limit: '50mb' }));
 // app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
@@ -81,7 +81,7 @@ app.use((error, request: Request, response: Response) => {
     response.status(400).json({ error: error });
 })
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'))
+    res.sendFile(path.join(__dirname, '../../client/index.html'))
 });
 // console.log(router1);
 

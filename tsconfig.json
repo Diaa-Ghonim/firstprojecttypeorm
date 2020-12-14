@@ -4,12 +4,13 @@
          "es5",
          "es6"
       ],
-      "target": "ES2017",
+      "target": "ES2019",
       "allowJs": true,
       "module": "commonjs",
       "moduleResolution": "node",
       "outDir": "./build",
-      "rootDir": ".",
+      // "rootDir": "./server",
+      "rootDir": "./server",
       "typeRoots": [
          // "./src/@types",
          "./node-modules/@types"
@@ -17,6 +18,9 @@
       "esModuleInterop": true,
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
-      "sourceMap": true
+      "sourceMap": true,
+      /* Advanced Options */
+      "skipLibCheck": true /* Skip type checking of declaration files. */,
+      "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
    }
 }

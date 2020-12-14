@@ -27,9 +27,9 @@
       "node": "12.6.0"
    },
    "scripts": {
-      "build": "rimraf ./build && tsc",
+      "build": "rimraf ./build && tsc server/src/index.ts",
       "start:dev": "nodemon",
-      "start": "node build/index.js",
+      "start": "node server/build/index.js",
       "postinstall": "npm run build"
    }
 }
