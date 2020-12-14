@@ -63,7 +63,7 @@ formEle.addEventListener('submit', async function (e) {
   // } catch (error) {
   //   console.log(error);
   // }
-  fetch('http://localhost:2020/upload-form', {
+  fetch('/upload-form', {
     method: 'post',
     // headers: {
     //   'Content-Type': 'application/x-www-form-urlencoded',
