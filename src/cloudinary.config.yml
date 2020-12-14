@@ -1,0 +1,19 @@
+---
+  development:
+cloud_name: abo - mandella
+api_key: '719215592854856'
+api_secret: bspEe4Te2QxvJMla5TFfb22-oD8
+enhance_image_tag: true
+static_file_support: false
+production:
+cloud_name: abo - mandella
+api_key: '719215592854856'
+api_secret: bspEe4Te2QxvJMla5TFfb22 - oD8
+enhance_image_tag: true
+static_file_support: true
+test:
+cloud_name: abo - mandella
+api_key: '719215592854856'
+api_secret: bspEe4Te2QxvJMla5TFfb22 - oD8
+enhance_image_tag: true
+static_file_support: false

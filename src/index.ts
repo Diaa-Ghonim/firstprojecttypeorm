@@ -1,89 +1,42 @@
 import "reflect-metadata";
-const express = require('express');
-const bodyParser = require('body-parser');
-import * as path from 'path';
-const app = express();
-import * as cors from 'cors';
+// const express = require('express');
+import express, { Application, Request, Response } from 'express';
+// const bodyParser = require('body-parser');
+const http = require('http');
+const https = require('https');
+import path from 'path';
+const app: Application = express();
+import cors from 'cors';
 app.use(cors());
-import { createConnection, getConnection, getRepository } from "typeorm";
+import { CustomMulter } from './middlewares/multerMiddleware';
+import { getConnection } from "typeorm";
 import { User } from "./entity/User";
+import './initializeTypeormConnection';
 app.use('/static', express.static(path.join(__dirname, '..')));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-app.use(bodyParser.json({ limit: '50mb' }));
 
+// app.use(bodyParser.json({ limit: '50mb' }));
+// app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(CustomMulter);
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 1000000 }));
+// app.set('port', process.env.PORT || 8000);
+const router1 = express.Router();
+const router2 = express.Router();
 
+app.all('/users', (req, res, next) => {
+    // console.log('all ', req.url);
+    next();
+})
 
-
-
-
-// createConnection().then(async connection => {
-
-//     console.log("Inserting a new user into the database...");
-//     const user = new User();
-//     user.firstName = "Timber";
-//     user.lastName = "Saw";
-//     user.age = 25;
-//     await connection.manager.save(user);
-//     console.log("Saved a new user with id: " + user.id);
-
-//     console.log("Loading users from the database...");
-//     const users = await connection.manager.find(User);
-//     console.log("Loaded users: ", users);
-
-//     console.log("Here you can setup and run express/koa/any other framework.");
-
-// }).catch(error => console.log(error));
-
-// MongoServerSelectionError: connect ECONNREFUSED 127.0.0.1: 27017
-(async () => {
-    try {
-        const ur = () => {
-            let a;
-
-            if (process.env.NODE_ENV === 'production') {
-                a = process.env.MONGO_DB_URI
-            }
-            console.log(a, 'this is a variable');
-            return a;
-        }
-        // await createConnection();
-        await createConnection({
-            // name: "default",
-            type: "mongodb",
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-            // port: 27017,
-            database: "firstproject",
-            // synchronize: true,
-            // logging: false,
-
-            // replicaSet: "articleappcluster.swdsz",
-            url: process.env.NODE_ENV === 'production' ? process.env.MONGO_DB_URI : '',
-            // url: "mongodb://articleappcluster.example.net:27017?replicaSet=test&connectTimeoutMS=3000000000",
-            // ssl: true,
-            // authSource: "admin",
-            entities: [
-                User
-            ]
-            // password: 'abomandella',
-            // username: 'admin',
-            // "entities": [
-            //     "src/entity/**/*.ts"
-            // ],
-        });
-        console.log('connection is successeded ....');
-
-    } catch (error) {
-        console.log(error);
-
-        console.log('connection is failured ...');
-
-    }
-})();
-console.log('after async');
-
-
-app.get('/users', async (req, res) => {
+// router1.use((req, res, next) => {
+//     console.log('router1 middleware');
+//     next();
+// });
+// router2.use((req, res, next) => {
+//     console.log('router2 middleware');
+//     next();
+// });
+router1.get('/users', async function asyncFunc(req, res) {
     try {
         const userRepo = getConnection().getRepository(User);
 
@@ -96,8 +49,14 @@ app.get('/users', async (req, res) => {
     }
 });
 
-app.post('/users', async (req, res) => {
-    console.log(req.body);
+app.post('/upload-form', (request: Request, response: Response) => {
+    // console.log(request, 'body');
+    console.log(request.files, 'files');
+    console.log(request.file, 'file');
+    response.json({ success: true, file: request.files[0] });
+});
+router2.post('/users', async (req, res) => {
+    // console.log(req.body);
 
     try {
         const userRepo = getConnection().getRepository(User);
@@ -113,13 +72,21 @@ app.post('/users', async (req, res) => {
     }
 });
 
+
+app.use(router1, router2);
+
+
+app.use((error, request: Request, response: Response) => {
+    console.log(error);
+    response.status(400).json({ error: error });
+})
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'))
 });
+// console.log(router1);
 
-const port = process.env.PORT || 8000;
-app.listen(port, () => console.log(`server is running now on port ${port}`));
-
+app.listen(2020, () => console.log(`server is running now on port ${app.get('port')}`));
+// https.createServer(app).listen(8443);
 
 
 
