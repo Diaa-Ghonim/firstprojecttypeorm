@@ -1,0 +1,27 @@
+{
+   "compilerOptions": {
+      "lib": [
+         "es5",
+         "es6"
+      ],
+      "target": "ES2019",
+      "allowJs": true,
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./build",
+      // "rootDir": "./server",
+      "rootDir": "./server",
+      "typeRoots": [
+         // "./src/@types",
+         "./node-modules/@types"
+      ],
+      "esModuleInterop": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "sourceMap": true,
+      "allowSyntheticDefaultImports": true, /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
+      /* Advanced Options */
+      "skipLibCheck": true /* Skip type checking of declaration files. */,
+      "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+   }
+}

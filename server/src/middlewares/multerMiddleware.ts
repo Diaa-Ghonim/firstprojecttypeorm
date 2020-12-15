@@ -47,8 +47,8 @@ const CustomMulter = (req: Request, res: Response, next: NextFunction) => {
       console.log(err);
       next(err)
     }
-    console.log(req.file);
-    console.log(req.files);
+    // console.log(req.file);
+    // console.log(req.files);
     // const result = await cloudinary.uploader.upload(req.files[0].path, {
     //   folder: '/images',
     //   unique_filename: true,

@@ -19,7 +19,7 @@ app.use('/static', express.static(path.join(__dirname, '..', '..', 'client')));
 app.use(CustomMulter);
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 1000000 }));
-// app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 2020);
 const router1 = express.Router();
 const router2 = express.Router();
 
@@ -28,14 +28,14 @@ app.all('/users', (req, res, next) => {
     next();
 })
 
-// router1.use((req, res, next) => {
-//     console.log('router1 middleware');
-//     next();
-// });
-// router2.use((req, res, next) => {
-//     console.log('router2 middleware');
-//     next();
-// });
+router1.use((req, res, next) => {
+    console.log('router1 middleware');
+    next();
+});
+router2.use((req, res, next) => {
+    console.log('router2 middleware');
+    next();
+});
 router1.get('/users', async function asyncFunc(req, res) {
     try {
         const userRepo = getConnection().getRepository(User);
@@ -76,16 +76,23 @@ router2.post('/users', async (req, res) => {
 app.use(router1, router2);
 
 
-app.use((error, request: Request, response: Response) => {
-    console.log(error);
-    response.status(400).json({ error: error });
+
+app.use('/here', (req, res, next) => {
+    throw new Error('error happen here')
 })
+
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/index.html'))
 });
+
+app.use((error, request: Request, response: Response) => {
+    console.log(error);
+    response.json({});
+});
+
 // console.log(router1);
 
-app.listen(2020, () => console.log(`server is running now on port ${app.get('port')}`));
+app.listen(app.get('port'), () => console.log(`server is running now on port ${app.get('port')}`));
 // https.createServer(app).listen(8443);
 
 
