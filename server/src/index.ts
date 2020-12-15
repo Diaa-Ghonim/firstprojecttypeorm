@@ -13,7 +13,10 @@ import { getConnection } from "typeorm";
 import { User } from "./entity/User";
 import './initializeTypeormConnection';
 app.use('/static', express.static(path.join(__dirname, '..', '..', 'client')));
-app.use('/images', express.static(path.join(__dirname, '..', '..', 'images')));
+app.use('/images', (req, res, next) => {
+    console.log('images served now');
+    next();
+}, express.static(path.join(__dirname, '..', '..', 'images')));
 // app.use(bodyParser.json({ limit: '50mb' }));
 // app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(CustomMulter);
